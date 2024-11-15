@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+
+<body>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+  
+    const calculator = document.createElement('div');
+    calculator.style.width = '250px';
+    calculator.style.margin = '50px auto';
+    calculator.style.padding = '20px';
+    calculator.style.border = '2px solid #333';
+    calculator.style.borderRadius = '10px';
+    calculator.style.textAlign = 'center';
+    calculator.style.fontFamily = 'Arial, sans-serif';
+    
+
+    const resultField = document.createElement('input');
+    resultField.type = 'text';
+    resultField.disabled = true;
+    resultField.style.width = '100%';
+    resultField.style.height = '40px';
+    resultField.style.fontSize = '1.5em';
+    resultField.style.textAlign = 'right';
+    resultField.style.padding = '10px';
+    resultField.style.marginBottom = '20px';
+    
+       calculator.appendChild(resultField);
+    
+   
+    const buttons = [
+        ['7', '8', '9', '/'],
+        ['4', '5', '6', '*'],
+        ['1', '2', '3', '-'],
+        ['0', '.', '=', '+']
+    ];
+    
+ 
+    buttons.forEach(row => {
+        const buttonRow = document.createElement('div');
+        buttonRow.style.marginBottom = '10px';
+        
+        row.forEach(buttonText => {
+            const button = document.createElement('button');
+            button.innerText = buttonText;
+            button.style.width = '50px';
+            button.style.height = '50px';
+            button.style.fontSize = '1.5em';
+            button.style.margin = '5px';
+            button.style.backgroundColor = '#f0f0f0';
+            button.style.border = '1px solid #ccc';
+            button.style.borderRadius = '5px';
+            button.style.cursor = 'pointer';
+
+            
+            button.addEventListener('click', function () {
+                if (buttonText === '=') {
+                    try {
+                        resultField.value = eval(resultField.value); 
+                    } catch (e) {
+                        resultField.value = 'Error'; 
+                    }
+                } else if (buttonText === 'C') {
+                    resultField.value = ''; 
+                } else {
+                    resultField.value += buttonText; 
+                }
+            });
+            
+          
+            buttonRow.appendChild(button);
+        });
+        
+       
+        calculator.appendChild(buttonRow);
+    });
+    
+    
+    const clearButton = document.createElement('button');
+    clearButton.innerText = 'C';
+    clearButton.style.width = '50px';
+    clearButton.style.height = '50px';
+    clearButton.style.fontSize = '1.5em';
+    clearButton.style.marginTop = '10px';
+    clearButton.style.backgroundColor = '#f0f0f0';
+    clearButton.style.border = '1px solid #ccc';
+    clearButton.style.borderRadius = '5px';
+    clearButton.style.cursor = 'pointer';
+    
+   
+    clearButton.addEventListener('click', function () {
+        resultField.value = '';
+    });
+    
+        calculator.appendChild(clearButton);
+
+        document.body.appendChild(calculator);
+});
+
+    </script>
+</body>
+
+</html>
